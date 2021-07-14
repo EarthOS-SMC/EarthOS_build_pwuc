@@ -1689,7 +1689,7 @@ int main(int argc, char *argv[])
 				_error("Number of inputs in the second argument must be from 1 to 4",true,line+1,13,filename);
 			fprintf(ow,"32\n2\n1\n%s\n%d\n",_getinput(0,0,i,cmd_argc,raw),in_tmp);
 			for(in_i=0;in_i<in_tmp;in_i++)
-				fprintf(ow,"%s\n",_getinput(1,in_tmp,i,cmd_argc,raw));
+				fprintf(ow,"%s\n",_getinput(1,in_i,i,cmd_argc,raw));
 		}
 		else if(strcmp(cmd,"include") == 0)
 		{
@@ -1746,7 +1746,7 @@ int main(int argc, char *argv[])
 					_error("Number of inputs in the second argument must be from 0 to 3",true,line+1,13,filename);
 				fprintf(ow,"%d\n",in_tmp);
 				for(in_i=0;in_i<in_tmp;in_i++)
-					fprintf(ow,"%s\n",_getinput(1,in_tmp,i,cmd_argc,raw));
+					fprintf(ow,"%s\n",_getinput(1,in_i,i,cmd_argc,raw));
 			}
 		}
 		else if(strcmp(cmd,"sync") == 0)
