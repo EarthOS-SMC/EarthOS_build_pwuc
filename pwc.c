@@ -757,7 +757,7 @@ int main(int argc, char *argv[])
 					if((c != '\n') && (c != EOF))
 						strncat(part,&c,1);
 				}
-				fprintf(ow,"1B\n%d\n1\n%s\n",cmd_argc+1,part);
+				fprintf(ow,"1B\n%d\n3\n%s\n\"wait\"\n%%whoami\n",cmd_argc+1,part);
 				for(in_i=0; in_i < cmd_argc; in_i++)
 				{
 					fprintf(ow,"%d\n",_getinputc(in_i,i,cmd_argc,raw));
