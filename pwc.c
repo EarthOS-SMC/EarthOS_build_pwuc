@@ -1774,7 +1774,7 @@ int main(int argc, char *argv[])
 				_error("Number of inputs in the first argument must be 2",true,line+1,13,filename);
 			if(_getinputc(1,i,cmd_argc,raw) != 1)
 				_error("Number of inputs in the second argument must be 1",true,line+1,13,filename);
-			fprintf(ow,"39\n2\n2\n%s\n%s\n1\n%s\n",_getinput(0,0,i,cmd_argc,raw),_getinput(0,1,i,cmd_argc,raw),_getinput(1,0,i,cmd_argc,raw));
+			fprintf(ow,"3B\n2\n2\n%s\n%s\n1\n%s\n",_getinput(0,0,i,cmd_argc,raw),_getinput(0,1,i,cmd_argc,raw),_getinput(1,0,i,cmd_argc,raw));
 		}
 		else if(strcmp(cmd,"smc_skiploop") == 0)
 		{
@@ -1784,7 +1784,7 @@ int main(int argc, char *argv[])
 			in_tmp=_getinputc(0,i,cmd_argc,raw);
 			if(in_tmp != 6)
 				_error("Number of inputs in the first argument must be 6",true,line+1,13,filename);
-			fprintf(ow,"3C\n2\n%d\n",in_tmp);
+			fprintf(ow,"3D\n2\n%d\n",in_tmp);
 			for(in_i=0;in_i<in_tmp;in_i++)
 				fprintf(ow,"%s\n",_getinput(0,in_i,i,cmd_argc,raw));
 			in_tmp=_getinputc(1,i,cmd_argc,raw);
@@ -1802,7 +1802,7 @@ int main(int argc, char *argv[])
 			in_tmp=_getinputc(0,i,cmd_argc,raw);
 			if(in_tmp != 6)
 				_error("Number of inputs in the first argument must be 6",true,line+1,13,filename);
-			fprintf(ow,"3D\n2\n%d\n",in_tmp);
+			fprintf(ow,"3E\n2\n%d\n",in_tmp);
 			for(in_i=0;in_i<in_tmp;in_i++)
 				fprintf(ow,"%s\n",_getinput(0,in_i,i,cmd_argc,raw));
 			in_tmp=_getinputc(1,i,cmd_argc,raw);
@@ -1820,7 +1820,7 @@ int main(int argc, char *argv[])
 			in_tmp=_getinputc(0,i,cmd_argc,raw);
 			if((in_tmp != 1) && (in_tmp != 2))
 				_error("Number of inputs in the first argument must be 1 or 2",true,line+1,13,filename);
-			fprintf(ow,"3E\n3\n%d\n",in_tmp);
+			fprintf(ow,"3F\n3\n%d\n",in_tmp);
 			for(in_i=0;in_i<in_tmp;in_i++)
 				fprintf(ow,"%s\n",_getinput(0,in_i,i,cmd_argc,raw));
 			in_tmp=_getinputc(1,i,cmd_argc,raw);
@@ -1846,6 +1846,13 @@ int main(int argc, char *argv[])
 			if(_getinputc(1,i,cmd_argc,raw) != 1)
 				_error("Number of inputs in the second argument must be 1",true,line+1,13,filename);
 			fprintf(ow,"40\n2\n3\n%s\n%s\n%s\n1\n%s\n",_getinput(0,0,i,cmd_argc,raw),_getinput(0,1,i,cmd_argc,raw),_getinput(0,2,i,cmd_argc,raw),_getinput(1,0,i,cmd_argc,raw));
+		}
+		else if(strcmp(cmd,"deletechar") == 0)
+		{
+			// deletechar
+			if(cmd_argc != 0)
+				_error("Number of arguments must be 0",true,line+1,12,filename);
+			fprintf(ow,"41\n0\n");
 		}
 		else if(strcmp(cmd,"mount") == 0)
 		{
@@ -1875,13 +1882,6 @@ int main(int argc, char *argv[])
 			if(_getinputc(1,i,cmd_argc,raw) != 1)
 				_error("Number of inputs in the second argument must be 1",true,line+1,13,filename);
 			fprintf(ow,"44\n2\n2\n%s\n%s\n1\n%s\n",_getinput(0,0,i,cmd_argc,raw),_getinput(0,1,i,cmd_argc,raw),_getinput(1,0,i,cmd_argc,raw));
-		}
-		else if(strcmp(cmd,"deletechar") == 0)
-		{
-			// deletechar
-			if(cmd_argc != 0)
-				_error("Number of arguments must be 0",true,line+1,12,filename);
-			fprintf(ow,"3F\n0\n");
 		}
 		else
 		{
