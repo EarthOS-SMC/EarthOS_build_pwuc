@@ -340,7 +340,7 @@ char *_getcontent(const char *input, int line, char *filename)
 	}
 	return out;
 }
-void endstrconv(char *infn, char *outfn, char *mode)
+void endstrconv(char *infn, char *outfn, char *mode, bool format)
 {
 	int line_alloc=64;
 	char *line = (char*) malloc(line_alloc);
@@ -348,6 +348,8 @@ void endstrconv(char *infn, char *outfn, char *mode)
 	char c;
 	FILE *ir = fopen(infn,"r");
 	FILE *ow = fopen(outfn,mode);
+	if(format)
+		fprintf(ow,"4;#EOS");
 	while((c=getc(ir)) != EOF)
 	{
 		if(c == '\n')
@@ -691,6 +693,9 @@ int main(int argc, char *argv[])
 	// Open output file
 	FILE *ow, *funcr;
 	ow=fopen(outfn,"w");
+	// Exec format
+	if(!(forceinclude))
+		fprintf(ow,"#EOS\n");
 	// Compile all commands
 	int cmd_argc,arg_inputc,in_i,in_i2,in_tmp,col,col2,bold,italic,underlined,func_type=0,linkdef_type=0;
 	char part[10240],part2[16],part3[10240],part4[10240],val1[512],op[3],val2[512],gate[4],func_name[255],linkdef_var_name[32];
@@ -1225,7 +1230,7 @@ int main(int argc, char *argv[])
 					putc('$',ow);
 				fprintf(ow,"tmp_lib_%s\n",linkdef_var_name);
 				fclose(ow);
-				endstrconv(part3,outfn,"a");
+				endstrconv(part3,outfn,"a",true);
 				ow = fopen(outfn,"a");
 				putc('\n',ow);
 				fclose(ow);
@@ -1917,7 +1922,7 @@ int main(int argc, char *argv[])
 	fclose(ow);
 	if(strconv)
 	{
-		endstrconv(outfn,".tmp","w");
+		endstrconv(outfn,".tmp","w",false);
 		ow = fopen(outfn,"w");
 		FILE *ar = fopen(".tmp","r");
 		while((c=getc(ar)) != EOF)
